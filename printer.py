@@ -1,24 +1,14 @@
 import random
+import requests
+requests.packages.urllib3.disable_warnings()
+from twython import Twython
+
+APP_KEY = 'YOUR APP KEY'
+APP_SECRET = 'YOUR APP SECRET'
+OAUTH_TOKEN = 'YOUR TOKEN'  # Access Token here
+OAUTH_TOKEN_SECRET = 'YOUR SECRET'  # Access Token Secret here
 
 def confirm(prompt=None, resp=False):
-    """prompts for yes or no response from the user. Returns True for yes and
-    False for no.
-
-    'resp' should be set to the default value assumed by the caller when
-    user simply types ENTER.
-
-    >>> confirm(prompt='Create Directory?', resp=True)
-    Create Directory? [y]|n: 
-    True
-    >>> confirm(prompt='Create Directory?', resp=False)
-    Create Directory? [n]|y: 
-    False
-    >>> confirm(prompt='Create Directory?', resp=False)
-    Create Directory? [n]|y: y
-    True
-
-    """
-    
     if prompt is None:
         prompt = 'Confirm'
 
@@ -47,8 +37,13 @@ def random_line(afile):
         line = aline
     return line.strip()
 
-tweetline=random_line(open('/Users/benzweig/Downloads/lines'))
-if confirm(prompt='tweet "' + tweetline + '" or nah?', resp=True):
-	print tweetline
-else:
-	print 'tweet cancelled ya bish'
+
+print 'WELCOME TO THE TWITTERDOME'
+while True:
+	tweetline=random_line(open('./output.txt'))
+	if confirm(prompt='tweet "' + tweetline + '" or nah?', resp=True):
+		twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+		twitter.update_status(status=tweetline)
+		print 'ay tweeted'
+	else:
+		print 'cancelled ya bish'
