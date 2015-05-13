@@ -36,8 +36,10 @@ def random_line(afile):
         line = aline
     return line.strip()
 
-tweetCancelled = ['cancelled ya bish\n', 'no tweets here\n', 'de-tweeted\n', "won't see the light of day\n", 'death 2 all tweets\n']
-tweetTweeted = ['ay tweeted\n', "it's in the cloud now\n", "ok, you're a tweetmonger\n", "i guess if you want\n", "sent against my better judgement\n"]
+tweetCancelled = ['cancelled ya bish', 'no tweets here', 'de-tweeted', "won't see the light of day", 'death 2 all tweets', "that wasn't funny anyways", "good call, kid", "i actually kinda liked that one.", "throw it on the tweet pyre", "entered the fuckstorm"]
+tweetTweeted = ['ay tweeted', "it's in the cloud now", "ok, you're a tweetmonger", "i guess if you want", "sent against my better judgement", "the guys are the office are gonna love that one", "logged by NSA", "yeah, that's def not racist.", "nice joke", "forwarded 2 grandma"]
+
+tweetsSent = 0
 
 print 'WELCOME TO THE TWITTERDOME'
 
@@ -50,6 +52,8 @@ while True:
         if confirm(prompt='tweet "' + tweetline + '" or nah?', resp=True):
             twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
             twitter.update_status(status=tweetline)
+            tweetsSent += 1
             print(random.choice(tweetTweeted))
+            print(str(tweetsSent)+" tweets sent, yo\n")
         else:
-            print(random.choice(tweetCancelled))
+            print(random.choice(tweetCancelled)+"\n")
