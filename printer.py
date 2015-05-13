@@ -54,6 +54,6 @@ while True:
             twitter.update_status(status=tweetline)
             tweetsSent += 1
             print(random.choice(tweetTweeted))
-            print(str(tweetsSent)+" tweets sent, yo\n")
+            print(str(tweetsSent)+" tweets sent so far, yo\n")
         else:
             print(random.choice(tweetCancelled)+"\n")
