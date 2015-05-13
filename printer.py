@@ -45,10 +45,11 @@ while True:
     tweetline=random_line(open('./output.txt'))
     if len (tweetline) > 140:
         print "tweet's too fuckin big, don't do it"
-    if confirm(prompt='tweet "' + tweetline + '" or nah?', resp=True):
-        twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
-        twitter.update_status(status=tweetline)
-        print(random.choice(tweetTweeted))
+        print 'here it is anyways: "' + tweetline + '"\n'
     else:
-        print(random.choice(tweetCancelled))
-        
+        if confirm(prompt='tweet "' + tweetline + '" or nah?', resp=True):
+            twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+            twitter.update_status(status=tweetline)
+            print(random.choice(tweetTweeted))
+        else:
+            print(random.choice(tweetCancelled))
