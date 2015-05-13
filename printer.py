@@ -1,7 +1,6 @@
-import random
-import requests
-requests.packages.urllib3.disable_warnings()
+import random, time, requests
 from twython import Twython
+requests.packages.urllib3.disable_warnings()
 
 APP_KEY = 'YOUR APP KEY'
 APP_SECRET = 'YOUR APP SECRET'
