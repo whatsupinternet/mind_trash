@@ -36,13 +36,19 @@ def random_line(afile):
         line = aline
     return line.strip()
 
+tweetCancelled = ['cancelled ya bish\n', 'no tweets here\n', 'de-tweeted\n', "won't see the light of day\n", 'death 2 all tweets\n']
+tweetTweeted = ['ay tweeted\n', "it's in the cloud now\n", "ok, you're a tweetmonger\n", "i guess if you want\n", "sent against my better judgement\n"]
 
 print 'WELCOME TO THE TWITTERDOME'
+
 while True:
-	tweetline=random_line(open('./output.txt'))
-	if confirm(prompt='tweet "' + tweetline + '" or nah?', resp=True):
-		twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
-		twitter.update_status(status=tweetline)
-		print 'ay tweeted'
-	else:
-		print 'cancelled ya bish'
+    tweetline=random_line(open('./output.txt'))
+    if len (tweetline) > 140:
+        print "tweet's too fuckin big, don't do it"
+    if confirm(prompt='tweet "' + tweetline + '" or nah?', resp=True):
+        twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+        twitter.update_status(status=tweetline)
+        print(random.choice(tweetTweeted))
+    else:
+        print(random.choice(tweetCancelled))
+        
